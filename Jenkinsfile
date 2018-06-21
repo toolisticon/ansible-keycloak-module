@@ -44,7 +44,8 @@ node {
         }
 
     } catch (e) {
-        notify.buildMessage(currentBuild, true, 'holi-oss', 'Error with recent changes: ' + build.summarizeBuild(currentBuild))
+        echo "Current build status: $currentBuild.currentResult"
+        notify.buildMessage(currentBuild, true, 'holi-oss', 'Error with recent changes: ' + build.releaseNotes(currentBuild))
         throw e
     }
 

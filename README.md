@@ -10,4 +10,4 @@
 
 * Docker 18+
 * LDAP Tools
-* PIP Packages:`(sudo) pip install -r requirements.txt`
+* PIP Packages:`(sudo) pip install -r dev-requirements.txt`
