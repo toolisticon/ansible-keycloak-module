@@ -5,7 +5,7 @@
   tasks:
     - name: Let's list all realms
       keycloak_list_realms:
-        server_url: localhost:8080
+        server_url: localhost:8888
         login: admin
         password: Pa55w0rd
       register: realms

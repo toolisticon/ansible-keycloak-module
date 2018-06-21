@@ -38,7 +38,7 @@ node {
         stage('Integration-Test') {
             sh returnStatus: true, script: "docker-compose build"
             sh "docker-compose build"
-            sh "docker-compose up"
+            sh "docker-compose up -d"
             sh "ansible-playbook test_end2end.yml"
             sh "docker-compose down"
         }

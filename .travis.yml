@@ -1,13 +1,21 @@
 sudo: required
 dist: trusty
+language: python
+python: "2.7"
 
+# Install ansible
+addons:
+  apt:
+    packages:
+    - python-pip
 
 services:
   - docker
 
 install:
+  - pip install https://github.com/ansible/ansible/archive/devel.tar.gz
   - docker-compose build
-  - docker-compose up
+  - docker-compose up -d
 
 script:
-  - ansible-playbook test.yml
+  - ansible-playbook test_end2end.yml
