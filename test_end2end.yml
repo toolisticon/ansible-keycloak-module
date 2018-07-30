@@ -5,9 +5,11 @@
   tasks:
     - name: Let's list all realms
       keycloak_list_realms:
-        server_url: localhost:8888
-        login: admin
-        password: Pa55w0rd
+        auth_keycloak_url: http://localhost:8888/auth
+        auth_client_id: admin-cli
+        auth_realm: master
+        auth_username: admin
+        auth_password: Pa55w0rd
       register: realms
 
     - debug: var=realms

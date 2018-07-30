@@ -13,9 +13,13 @@ services:
   - docker
 
 install:
-  - pip install -r dev-requirements.txt
-  - docker-compose build
-  - docker-compose up -d
+  - pip install -r requirements-dev.txt
 
 script:
+  - make lint
+  - make build
+  - make test
+  - docker-compose build
+  - docker-compose up -d && bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:8888)" != "200" ]]; do sleep 5; done'
+  - make end2end_test
   - ansible-playbook test_end2end.yml

@@ -28,20 +28,26 @@ node {
         }
 
         stage('Build') {
-            sh "" // TODO
+            sh "pip install -r requirements-dev.txt"
+            sh "make lint"
+            sh "make build"
         }
 
         stage('Test') {
-            sh "" // TODO
+            sh "make test"
+            junit 'build/reports/TESTS.xml'
         }
 
         stage('Integration-Test') {
             sh returnStatus: true, script: "docker-compose build"
             sh "docker-compose build"
             sh "docker-compose up -d"
+            sh "make end2end_test"
             sh "ansible-playbook test_end2end.yml"
             sh "docker-compose down"
         }
+
+        echo "Current build status: $currentBuild.currentResult"
 
     } catch (e) {
         echo "Current build status: $currentBuild.currentResult"
